@@ -105,7 +105,7 @@ class User {
       JOIN users to_user ON messages.to_username = to_user.username
       WHERE from_user.username = $1`, [username]
     );
-    if (result.rowCount < 1) throw new ExpressError('User not found', 404);
+    if (result.rowCount < 1) throw new ExpressError('No messages found', 404);
     // Destructure each row's fields into message object, and nested to_user object
     const resArr = result.rows.map(({username, first_name, last_name, phone, id, body, sent_at, read_at}) => {
       const to_user = {username, first_name, last_name, phone};
@@ -132,7 +132,7 @@ class User {
       JOIN users to_user ON messages.to_username = to_user.username
       WHERE to_user.username = $1`, [username]
     );
-    if (result.rowCount < 1) throw new ExpressError('User not found', 404);
+    if (result.rowCount < 1) throw new ExpressError('No messages found', 404);
     // Destructure each row's fields into message object, and nested to_user object
     const resArr = result.rows.map(({username, first_name, last_name, phone, id, body, sent_at, read_at}) => {
       const from_user = {username, first_name, last_name, phone};
