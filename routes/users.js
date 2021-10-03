@@ -1,9 +1,7 @@
 const express = require("express");
 const router = new express.Router();
 const User = require('../models/user');
-const ExpressError = require('../expressError');
 const auth = require('../middleware/auth');
-const { SECRET_KEY } = require('../config');
 
 /** GET / - get list of users.
  *

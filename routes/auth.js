@@ -35,8 +35,8 @@ router.post('/login', async (req, res, next) => {
 router.post('/register', async (req, res, next) => {
     try{
         const user = await User.register(req.body);
-        User.updateLoginTimestamp(username);
-        const token = jwt.sign({username}, SECRET_KEY);
+        User.updateLoginTimestamp(user.username);
+        const token = jwt.sign({username: user.username}, SECRET_KEY);
         return res.json({token});
     } catch (err) {
         if (err.code === "23505") return next(new ExpressError('Username already exists', 400))
